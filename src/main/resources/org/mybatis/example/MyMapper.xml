@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.mybatis.example.MyMapper">
+    <select id="selectAnswerBeanById" parameterType="int" resultType="com.domain.AnswerBean">
+        select *
+        from answer_bean
+        where seq = #{seq}
+    </select>
+    <select id="selectAnswerBeanByName" parameterType="String" resultType="com.domain.AnswerBean">
+        select *
+        from answer_bean
+        where username = #{username}
+    </select>
+    <insert id="interIntoAnswerBean" useGeneratedKeys="true" keyProperty="seq">
+        insert into answer_bean (SEQ,USERNAME, VOTENUMBER, ARTICLECONTEXT) values
+        <foreach collection="list" item="AnswerBean" separator=",">
+            (#{AnswerBean.seq},#{AnswerBean.userName}, #{AnswerBean.voteNumber}, #{AnswerBean.articleContent})
+        </foreach>
+    </insert>
+</mapper>
